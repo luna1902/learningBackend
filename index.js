@@ -3,14 +3,22 @@ const app = express()
 const port = 3000
 
 function handleFirstRequest(req, res)
-{
-    var calculated= Sum(100);
+{   
+    var Counter= req.query.counter;
+    var calculated= Sum(Counter);
     console.log(calculated);
     var answer = "the sum is " + calculated;
     res.send(answer);
 }
 
-app.get('/', handleFirstRequest)
+function createUser(req,res)
+{
+    res.send("Hello World");
+}
+app.get('/handlesum', handleFirstRequest)    
+// every time the route called is "/handlesum", the function handleFirstrequest is called
+app.post('/createuser', createUser)
+app.get('/handlesum2', handleFirstRequest)
 
 function started() {  
         console.log('Example app listening on port ${port}' )
