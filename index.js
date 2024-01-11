@@ -2,6 +2,16 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+
+function middlware(req,res,next)          //working through middleware          always callled before route handlers
+{                                          // middleware provides authentication
+    console.log("from inside middleware" + req.headers.Counter);
+    next();                 //if middleware calls next() only then will the control move forward
+
+   //in case middlewares are not calling next() due to some reasons, they use res.send("error message")  to tell that request won't be processed and there is error from inside middleware
+}
+app.use(middlware);                                 //registering a middleware
+
 function handleFirstRequest(req, res)
 {   
     console.log(req.headers);                                   // working through headers
@@ -30,6 +40,8 @@ function started() {
  
 
 app.listen(port, started)
+
+
 
 
 function Sum(Counter)
