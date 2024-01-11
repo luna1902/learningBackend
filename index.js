@@ -1,14 +1,15 @@
 const express = require('express')
 const app = express()
 const port = 3000
-
+var requestNumber =0;
 
 function middlware(req,res,next)          //working through middleware          always callled before route handlers
-{                                          // middleware provides authentication
-    console.log("from inside middleware" + req.headers.Counter);
+{                                         // lets you perform the global functions that need to be performed before your actual handler is called
+    requestNumber=requestNumber+ 1;                                   // middleware provides authentication
+    console.log(requestNumber);
     next();                 //if middleware calls next() only then will the control move forward
 
-   //in case middlewares are not calling next() due to some reasons, they use res.send("error message")  to tell that request won't be processed and there is error from inside middleware
+   //in case middlew ares are not calling next() due to some reasons, they use res.send("error message")  to tell that request won't be processed and there is error from inside middleware
 }
 app.use(middlware);                                 //registering a middleware
 
