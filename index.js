@@ -4,7 +4,8 @@ const port = 3000
 
 function handleFirstRequest(req, res)
 {   
-    var Counter= req.query.counter;
+    console.log(req.headers);                                   // working through headers
+    var Counter= req.headers.counter;
     var calculated= Sum(Counter);
     console.log(calculated);
     var answer = "the sum is " + calculated;
@@ -15,6 +16,8 @@ function createUser(req,res)
 {
     res.send("Hello World");
 }
+
+
 app.get('/handlesum', handleFirstRequest)    
 // every time the route called is "/handlesum", the function handleFirstrequest is called
 app.post('/createuser', createUser)
